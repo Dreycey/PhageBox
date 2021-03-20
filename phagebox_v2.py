@@ -5,8 +5,11 @@ import phagebox_modules.arduino_controller as ard_ctrl
 # std packages
 import numpy as np
 import random
+import os.path
+from os import path
 # non-std packages
 import tkinter as tk
+from multiprocess import Process
 #from tkinter import ttk
 import matplotlib
 matplotlib.use("TkAgg")
@@ -29,7 +32,7 @@ the phagebox layout can be found in this python file.
 
 # Globals
 LARGE_FONT= ("Verdana", 12)
-TITLE_FONT= ("Verdana", 30)
+TITLE_FONT= ("Verdana", 40)
 style.use("ggplot")
 
 # Page classes
@@ -50,7 +53,7 @@ class phageBoxGUI(tk.Tk):
 
         # instantiate the other frame/page classes
         self.frames = {}
-        for F in (PCRPage, PhageBoxHome):
+        for F in (PCRPage, PhageBoxHome, DNAiso):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -80,9 +83,19 @@ class PhageBoxHome(tk.Frame):
         button1 = tk.Button(self, text="PhageBox PCR", width=10, height=5, command=lambda: controller.show_frame(PCRPage))
         button1.grid(row=2, column=2)
 
-        button2 = tk.Button(self, text="DNA Isolation", width=10, height=5, command=lambda: controller.show_frame(PhageBoxDNAiso))
+        button2 = tk.Button(self, text="DNA Isolation", width=10, height=5, command=lambda: controller.show_frame(DNAiso))
         button2.grid(row=2, column=3)
 
+        button3 = tk.Button(self, text="Titer Assay", width=10, height=5, command=lambda: controller.show_frame(DNAiso))
+        button3.grid(row=2, column=4)
+
+        button4 = tk.Button(self, text="BRED", width=10, height=5, command=lambda: controller.show_frame(PhageBoxDNAiso))
+        button4.grid(row=3, column=9)
+
+        button5 = tk.Button(self, text="Restriction Enzyme \n Digest", width=10, height=5, command=lambda: controller.show_frame(PhageBoxDNAiso))
+        button5.grid(row=4, column=9)
+
+        # image of the phagebox
         img_height = 500
         img_width = int(img_height * 1.8)
         load = Image.open("figures/phagebox.png").resize((img_width,img_height))
@@ -101,8 +114,9 @@ class PCRPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-
+        self.ard_process = False # arduino process
         ard_obj = ard_ctrl.arduino_controller('/dev/cu.usbserial-1440')
+        self.ard = None; # arduino
 
         # labels for the page
         label = tk.Label(self, text="PhageBox PCR Module", font=TITLE_FONT)
@@ -134,9 +148,18 @@ class PCRPage(tk.Frame):
                                     height=2, command=self.temp_trigger)
         plotconfig_button.grid(row=3, column=3)
 
-        bangbang_button = tk.Button(self, text="Run the PCR Simulation", width=15,
+
+        bangbang_button = tk.Button(self, text="Look at output", width=15,
                                     height=2, command=self.pcr_trigger)
         bangbang_button.grid(row=4, column=3)
+
+        bangbang_button_on = tk.Button(self, text="Start PCR", width=15,
+                                    height=2, command=self.arduino_on)
+        bangbang_button_on.grid(row=4, column=4)
+
+        bangbang_button_stop = tk.Button(self, text="Stop PCR", width=15,
+                                    height=2, command=self.arduino_off)
+        bangbang_button_stop.grid(row=4, column=5)
 
     def plotTempTimeVec(self,tempvec, timevec):
         """
@@ -171,25 +194,10 @@ class PCRPage(tk.Frame):
         fig, ax_array = self.plotTempTimeVec(tempvec, timevec)
         canvas = FigureCanvasTkAgg(fig, self)
         canvas.draw()
-        canvas.get_tk_widget().grid(row=6, columnspan=4)
+        canvas.get_tk_widget().grid(row=6, columnspan=6)
 
-    def pcr_trigger(self):
-        """
-        This function starts  the communication with the arduino. In essence, it
-        calls the PCR control module to impliment a backend controller for
-        regulating the temperatures according to an input config file.
-        """
-
-        # if len(self.e1.get()) < 1:
-        #     print(" \n CANT RUN THIS!! Must input a config file first!! \n")
-        #
-        # # creating a backend object and calling the bang-bang ctrl
-        # config_file_path = self.e1.get()
-        # pcr_object = ctrl.PhageBoxPCR(config_file_path)
-        # # call the bang bang method call to regulate the temperature
-        # pcr_object.bangbang_ctrl(self.e2.get())
-
-
+    def getTempVec(self):
+        """ returns the temperature vector in the correct format """
         ###### NEW
         config_file_path = self.e1.get()
         pcr_object = ctrl.PhageBoxPCR(config_file_path) #instantiate
@@ -202,13 +210,47 @@ class PCRPage(tk.Frame):
             for time_i in range(int(timevec[temp_index])): # TODO this is a hack..
                 tempvec2.append(tempvec[temp_index])
 
+        return tempvec2, timevec
+
+    def arduino_on(self):
+        """ turns the arduino on """
+        print("Now startinng the arduino")
+        if not path.exists(self.e2.get()):
+            outfile = open(self.e2.get(), "w+")
+            outfile.close()
+
+        tempvec2, timevec = self.getTempVec()
+        self.ard = ard_ctrl.arduino_controller('/dev/cu.usbserial-1440')
+        self.ard_process = Process(target=self.ard.bangbang, args=(tempvec2,range(len(tempvec2)),self.e2.get(), '2', '1','TEC_1:'))
+        self.ard_process.start()
+
+    def arduino_off(self):
+        """ turns the arduino off """
+        print("Now stopping the arduino, if a process exists")
+        if (self.ard_process != None):
+            del self.ard
+            self.ard_process.terminate()
+
+    def pcr_trigger(self):
+        """
+        This function starts  the communication with the arduino. In essence, it
+        calls the PCR control module to impliment a backend controller for
+        regulating the temperatures according to an input config file.
+        """
+
+        # initialize output file if it doesn't exist
+        if not path.exists(self.e2.get()):
+            outfile = open(self.e2.get(), "w+")
+            outfile.close()
+
+        tempvec2, timevec = self.getTempVec()
         # displaying to tkinter
         fig, ax_array = plt.subplots()
 
         #self.plotTempTimeVec(fig, ax_array, tempvec, timevec)
         canvas = FigureCanvasTkAgg(fig, self)
         #canvas.draw()
-        canvas.get_tk_widget().grid(row=6, columnspan=4)
+        canvas.get_tk_widget().grid(row=6, columnspan=6)
 
         x = np.arange(0, 2*np.pi, 0.01)  # x-array
 
@@ -232,15 +274,68 @@ class PCRPage(tk.Frame):
 
         ani = animation.FuncAnimation(fig, animate, interval=1000)
 
-        # print("it should be working..")
-        # ard = ard_ctrl.arduino_controller('/dev/cu.usbserial-1440')
-        # x = threading.Thread(target=ard.bangbang(tempvec2,
-        #                                          range(len(tempvec2)),
-        #                                          self.e2.get(), '2', '1','TEC_1:'),
-        #                      args=(1,))
-        # x.start()
-
         tk.update()
+
+class DNAiso(tk.Frame):
+    """
+    This class is responsible for the DNA isolation of phages on the phagebox
+    """
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        self.ard_process = False # arduino process
+        ard_obj = ard_ctrl.arduino_controller('/dev/cu.usbserial-1440')
+
+        # labels for the page
+        label = tk.Label(self, text="PhageBox DNA iso module", font=TITLE_FONT)
+        label.grid(row=1, column=0, columnspan=4)
+
+        # button definitions - navigation
+        button1 = tk.Button(self, text="PhageBox Home", width=10, height=3,
+                            command=lambda: controller.show_frame(PhageBoxHome))
+        button1.grid(row=2, column=0)
+
+        # button toggle the light
+        button2 = tk.Button(self, text="toggle light", width=10, height=3,
+                            command=lambda: ard_obj.toggleBacklight())
+        button2.grid(row=2, column=1)
+
+        # button toggle the magnet
+        button2 = tk.Button(self, text="toggle magnet", width=10, height=3,
+                            command=lambda: ard_obj.toggleMagnet())
+        button2.grid(row=3, column=0, columnspan=1)
+
+        tk.Label(self, text="Set chip temperature \n (must stop PCR, if running):").grid(row=4, column=0)
+        self.tempSet = tk.Entry(self)
+        self.tempSet.grid(row=4, column=1)
+
+        # button toggle the magnet
+        button3 = tk.Button(self, text="Set Temp", width=10, height=3,
+                            command=lambda: ard_obj.setConstantTemp(self.tempSet.get()))
+        button3.grid(row=4, column=2, columnspan=1)
+
+        # image of the magnet on the phagebox
+        img_height = 100
+        img_width = int(img_height * 1.8)
+        load = Image.open("figures/phagebox_magnet.png").resize((img_width,img_height))
+        render = ImageTk.PhotoImage(load)
+        img = tk.Label(self, image=render)
+        img.image = render
+        img.grid(row=3, column=1, rowspan=1, columnspan=1)
+
+        # image of the magnet on the phagebox
+        img_height = 500
+        img_width = int(img_height * 1.8)
+        load = Image.open("figures/dna_isolation_mainpic.png").resize((img_width,img_height))
+        render = ImageTk.PhotoImage(load)
+        img = tk.Label(self, image=render)
+        img.image = render
+        img.grid(row=5, column=0, columnspan=10, rowspan=10) #, rowspan=2, columnspan=2)
+
+######
+# MAIN
+######
 
 def main():
     root = phageBoxGUI()
