@@ -7,6 +7,7 @@ import numpy as np
 import random
 import os.path
 from os import path
+import sys
 # non-std packages
 import tkinter as tk
 from multiprocess import Process
@@ -42,9 +43,10 @@ class phageBoxGUI(tk.Tk):
     phagebox software.
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, serial_port, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
+        self.ser_port = serial_port
         # Setting properties of the main frame
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand = True)
@@ -75,6 +77,10 @@ class PhageBoxHome(tk.Frame):
     """
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+
+        # save an attribute for the ser port
+        self.ser_port = controller.ser_port
+
         # labels for the page
         label = tk.Label(self, text="PhageBox PCR Module", font=TITLE_FONT)
         label.grid(row=1, column=3)
@@ -89,10 +95,10 @@ class PhageBoxHome(tk.Frame):
         button3 = tk.Button(self, text="Titer Assay", width=10, height=5, command=lambda: controller.show_frame(DNAiso))
         button3.grid(row=2, column=4)
 
-        button4 = tk.Button(self, text="BRED", width=10, height=5, command=lambda: controller.show_frame(PhageBoxDNAiso))
+        button4 = tk.Button(self, text="BRED", width=10, height=5, command=lambda: controller.show_frame(DNAiso))
         button4.grid(row=3, column=9)
 
-        button5 = tk.Button(self, text="Restriction Enzyme \n Digest", width=10, height=5, command=lambda: controller.show_frame(PhageBoxDNAiso))
+        button5 = tk.Button(self, text="Restriction Enzyme \n Digest", width=10, height=5, command=lambda: controller.show_frame(DNAiso))
         button5.grid(row=4, column=9)
 
         # image of the phagebox
@@ -114,8 +120,11 @@ class PCRPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        # save an attribute for the ser port
+        self.ser_port = controller.ser_port
+
         self.ard_process = False # arduino process
-        ard_obj = ard_ctrl.arduino_controller('/dev/cu.usbserial-1440')
+        ard_obj = ard_ctrl.arduino_controller(self.ser_port)
         self.ard = None; # arduino
 
         # labels for the page
@@ -160,6 +169,15 @@ class PCRPage(tk.Frame):
         bangbang_button_stop = tk.Button(self, text="Stop PCR", width=15,
                                     height=2, command=self.arduino_off)
         bangbang_button_stop.grid(row=4, column=5)
+
+        # image of the magnet on the phagebox
+        img_height = 500
+        img_width = int(img_height * 1.8)
+        load = Image.open("figures/pcrfig.png").resize((img_width,img_height))
+        render = ImageTk.PhotoImage(load)
+        img = tk.Label(self, image=render)
+        img.image = render
+        img.grid(row=5, column=0, columnspan=10, rowspan=10) #, rowspan=2, columnspan=2)
 
     def plotTempTimeVec(self,tempvec, timevec):
         """
@@ -220,7 +238,7 @@ class PCRPage(tk.Frame):
             outfile.close()
 
         tempvec2, timevec = self.getTempVec()
-        self.ard = ard_ctrl.arduino_controller('/dev/cu.usbserial-1440')
+        self.ard = ard_ctrl.arduino_controller(self.ser_port)
         self.ard_process = Process(target=self.ard.bangbang, args=(tempvec2,range(len(tempvec2)),self.e2.get(), '2', '1','TEC_1:'))
         self.ard_process.start()
 
@@ -284,11 +302,14 @@ class DNAiso(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        # save an attribute for the ser port
+        self.ser_port = controller.ser_port
+
         self.ard_process = False # arduino process
         ard_obj = ard_ctrl.arduino_controller('/dev/cu.usbserial-1440')
 
         # labels for the page
-        label = tk.Label(self, text="PhageBox DNA iso module", font=TITLE_FONT)
+        label = tk.Label(self, text="PhageBox DNA isolation module", font=TITLE_FONT)
         label.grid(row=1, column=0, columnspan=4)
 
         # button definitions - navigation
@@ -336,9 +357,20 @@ class DNAiso(tk.Frame):
 ######
 # MAIN
 ######
+HELPMSG = """
+
+You must have a serial port when using the phagebox GUI.
+For example, use the folowing command:
+
+python phagebox_v2.py /dev/cu.usbserial-1440
+"""
 
 def main():
-    root = phageBoxGUI()
+    ARG_LENGTH = 2
+    if (len(sys.argv) != ARG_LENGTH):
+        print(HELPMSG)
+        exit(1)
+    root = phageBoxGUI(sys.argv[1])
     root.mainloop()
 
 if __name__ == "__main__":

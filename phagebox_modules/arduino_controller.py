@@ -33,7 +33,7 @@ class arduino_controller():
         ser.write(bytes("6", 'ascii')) # turn magnets off
         offstring2 = bytes("3", 'ascii')
         offstring2 = bytes("1", 'ascii')
-        
+
     def toggleBacklight(self):
         """turns the backlight on and off"""
         ser = self.ser
@@ -56,61 +56,85 @@ class arduino_controller():
             ser.write(bytes("5", 'ascii'))
             self.magnetOn = True
 
-    def setConstantTemp(self, tempSet, parse_cmd):
+    def setConstantTemp(self, tempSet):
         """sets a constant temperature for the chip"""
         print("Starting to set a constant temp")
         ser = self.ser
+        # What is the temp supposed to be
+        set_temp = float(tempSet)
+
 
         counter1 = 0
         time_i = 0
 
-        # on and off strings for the relats
+        # on and off strings for the relays
         onstring1 = bytes("2", 'ascii')
         offstring1 = bytes("1", 'ascii')
         onstring2 = bytes("4", 'ascii')
         offstring2 = bytes("3", 'ascii')
 
-        relayon = True
-        ser.write(onstring)
-        sleep(2)
+        relayon = True # start heating the chip.
+        def turnRelaysOn():
+            """ turns both relays on """
+            ser.write(onstring1)
+            ser.write(onstring2)
+            sleep(2) # let it turn change relays
+
+        def turnRelaysOff():
+            """ turns both relays off """
+            ser.write(offstring1)
+            ser.write(offstring2)
+            sleep(2) # let it turn change relays
+
+        tempArray = [0,0,0]
         while True:
-             counter1 += 1
-#             print(ser.readline()) # Read the newest output from the Arduino
-             temperature_i = str(ser.readline())
-             print(temperature_i)
-             # parse the string
-             if parse_cmd in temperature_i:
-                 temperature_i = float(temperature_i.split(" ")[1].rstrip("\\r\\n'"))
-                 print(temperature_i)
-                 time_i += 1
-             else:
-                 continue
+            # print(ser.readline()) # Read the newest output from the Arduino
+            temperature_i = str(ser.readline())
+            print(temperature_i)
+            ###
+            # Save temp in diff vectors
+            ###
+            if 'TEC_1:' in temperature_i:
+                temperature_i = float(temperature_i.split(" ")[1].rstrip("\\r\\n'"))
+                tempArray[0] = temperature_i
+                print(f'TEC 1 is {temperature_i}')
+            elif 'TEC_2:' in temperature_i:
+                temperature_i = float(temperature_i.split(" ")[1].rstrip("\\r\\n'"))
+                tempArray[1] = temperature_i
+                print(f'TEC 2 is {temperature_i}')
+            elif 'TEC_MET' in temperature_i:
+                temperature_i = float(temperature_i.split(" ")[1].rstrip("\\r\\n'"))
+                tempArray[2] = temperature_i
+                print(f'TEC MET is {temperature_i}')
+            else:
+                print('The temperature parse string {temperature} does not contain:')
+                print('TEC_1, TEC_2, or TEC_MET so the arduino code needs updated')
+                continue
+                #exit(1)
 
-             # calculate the current temperature based on the current time
-             currenttime_index = time_i
-             set_temp = tempvec[currenttime_index]
+            avg_temp = float(numpy.mean(tempArray))
+            #print(f"The average is: {avg_temp}")
 
-             # controller!!! BANG BANG!
-             if temperature_i > set_temp:
-                 #THEN TURN THE RELAY OFF
-                 ser.write(offstring1)
-                 ser.write(offstring2)
-                 sleep(2)
-                 relayon = False
-                 print(f"Is the relay on: {relayon}")
-             else:
-                 # make sure the RELAY IS ON AND CONTINUE
-                 #if relayon == False:
-                 ser.write(onstring1)
-                 ser.write(onstring2)
-                 sleep(2)
-                 print(f"Is the relay on: {relayon}")
-                 relayon = True
+            if counter1 > 3:
+                 # controller!!! BANG BANG!
+                 if avg_temp > set_temp:
+                    # THEN TURN THE RELAYS OFF
+                    turnRelaysOff()
+                    sleep(2)
+                    relayon = False
+                    print(f"Is the relay on: {relayon}")
+                 else:
+                    # make sure the RELAY IS ON AND CONTINUE
+                    turnRelaysOn()
+                    sleep(2)
+                    relayon = True
+                    print(f"Is the relay on: {relayon}")
 
-             temp_vec.append(temperature_i)
-             counter_vec.append(counter1)
-
-             sleep(.1) #delay for 10th of a second
+            # keep track of the temps
+            #temp_vec.append(avg_temp)
+            #counter_vec.append(counter1)
+            counter1 += 1 # increment loop counter
+            sleep(.1) #delay for 10th of a second
 
     def bangbang(self, tempvec, timevec, outpath, onstring, offstring, parse_cmd):
         """
