@@ -77,13 +77,16 @@ class PhageBoxHome(tk.Frame):
     PhageBox GUI.
     """
     def __init__(self, parent, controller):
+        """
+        Constructor for the home page
+        """
         tk.Frame.__init__(self, parent)
 
         # save an attribute for the ser port
         self.ser_port = controller.ser_port
         self.ROWCURR = 0
         self.ard_process = [None, None] # arduino process
-        self.ard = [None, None]
+        # TODO: DELETE: self.ard = [None, None]
         self.ard_obj = ard_ctrl.arduino_controller(self.ser_port)
         self.configEntryList = [None, None, None]
         self.parse_cmds = [('2', '1','TEC_1:'),('4', '3','TEC_2:')]
@@ -408,20 +411,19 @@ class PhageBoxHome(tk.Frame):
             outfile = open(outfileentry.get(), "w+")
             outfile.close()
 
-        print(f"here is ard: {self.ard}")
-        print(self.ard[peltnumber])
-        self.ard[peltnumber] = ard_ctrl.arduino_controller(self.ser_port)
+        print(f"here is ard: {self.ard_obj}")
+        #self.ard[peltnumber] = ard_ctrl.arduino_controller(self.ser_port)
         # multiprocess
         if (const == False):
             ontrig, offtrig, parsestring = self.parse_cmds[peltnumber]
             tempvec2, timevec = self.getTempVec(peltnumber)
-            self.ard_process[peltnumber] = Process(target=self.ard[peltnumber].bangbang,
+            self.ard_process[peltnumber] = Process(target=self.ard_obj.bangbang,
                                                    args=(tempvec2,range(len(tempvec2)),
                                                    outfileentry.get(), ontrig, offtrig,
                                                    parsestring, two))
         else:
             print(f"here whats going in {outfileentry.get()}")
-            self.ard_process[peltnumber] = Process(target=self.ard[peltnumber].setConstantTemp,
+            self.ard_process[peltnumber] = Process(target=self.ard_obj.setConstantTemp,
                                                    args=( float(outfileentry.get()),
                                                           self.tempoutfileEntry.get(),
                                                         )
@@ -435,8 +437,12 @@ class PhageBoxHome(tk.Frame):
         if (self.ard_process[peltnumber] != None):
             print(f"stopping process for peltier: {peltnumber}")
             self.ard_process[peltnumber].terminate()
-            self.ard[peltnumber] = None
+            #TODO: may need to call destructor like below
+            #self.ard[peltnumber] = None
             self.ard_process[peltnumber] = None
+            # Restart the object to call the destructor
+            self.ard_obj = None
+            self.ard_obj = ard_ctrl.arduino_controller(self.ser_port)
         else:
             print(f"there is no process for peltier: {peltnumber}")
 
