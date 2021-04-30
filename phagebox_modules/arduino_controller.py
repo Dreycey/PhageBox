@@ -198,14 +198,13 @@ class arduino_controller():
                     continue
                 else:
                     temperature_list = openedfile[-1].strip("\n").split(",")
+                    time_i += 1
+                    #time_i = float(temperature_list[0])
                     if (parse_cmd == "TEC_1:"):
-                        time_i += 1
                         temperature_i = float(temperature_list[1])
                     elif (parse_cmd == "TEC_2:"):
-                        time_i += 1
                         temperature_i = float(temperature_list[2])
                     elif (parse_cmd == "TEC_MET:"):
-                        time_i += 1
                         temperature_i = float(temperature_list[3])
                     else:
                         print("The parse command is not correct")
