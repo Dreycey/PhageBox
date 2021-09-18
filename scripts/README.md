@@ -1,6 +1,10 @@
 # Phagebox Scripts
 
 ## Description
+This directory contains scripts for various tasks regarding the Phagebox. For one, it contains scripts that can be used for plotting data produced by both the magnetometer and by the on-device temperature sensors. 
+
+
+## Directory Structure
 This directory contains scripts for the following:
 
 1. Magnetometer testing.
