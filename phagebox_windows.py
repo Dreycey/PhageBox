@@ -414,22 +414,33 @@ class PhageBoxHome(tk.Frame):
         print(f"here is ard: {self.ard_obj}")
         #self.ard[peltnumber] = ard_ctrl.arduino_controller(self.ser_port)
         # multiprocess
-        if (const == False):
+        if (const == False): # bang-bang
             ontrig, offtrig, parsestring = self.parse_cmds[peltnumber]
             tempvec2, timevec = self.getTempVec(peltnumber)
-            self.ard_process[peltnumber] = Process(target=self.ard_obj.bangbang,
-                                                   args=(tempvec2,range(len(tempvec2)),
-                                                   outfileentry.get(), ontrig, offtrig,
-                                                   parsestring, two))
-        else:
-            print(f"here whats going in {outfileentry.get()}")
-            self.ard_process[peltnumber] = Process(target=self.ard_obj.setConstantTemp,
-                                                   args=( float(outfileentry.get()),
-                                                          self.tempoutfileEntry.get(),
-                                                        )
-                                                  )
-        self.ard_process[peltnumber].start()
+            # self.ard_process[peltnumber] = Process(target=self.ard_obj.bangbang,
+            #                                        args=(tempvec2,range(len(tempvec2)),
+            #                                        outfileentry.get(), ontrig, offtrig,
+            #                                        parsestring, two))
 
+            self.ard_process[peltnumber] = threading.Thread(target=self.ard_obj.bangbang,
+                                                  args=(tempvec2,range(len(tempvec2)),
+                                                        outfileentry.get(), ontrig, offtrig,
+                                                        parsestring, two)
+                                                    )
+        else: # constant temperature
+            print(f"here whats going in {outfileentry.get()}")
+            # self.ard_process[peltnumber] = Process(target=self.ard_obj.setConstantTemp,
+            #                                        args=( float(outfileentry.get()),
+            #                                               self.tempoutfileEntry.get(),
+            #                                             )
+            #                                       )
+            self.ard_process[peltnumber] = threading.Thread(target=self.ard_obj.setConstantTemp,
+                                                            args=(float(outfileentry.get()),
+                                                                  self.tempoutfileEntry.get(),
+                                                        )
+                                                    )
+
+        self.ard_process[peltnumber].start()
 
     def arduino_off(self, outfileentry, peltnumber):
         """ turns the arduino off """
@@ -504,6 +515,10 @@ class PhageBoxHome(tk.Frame):
                  column=gridvec[1],
                  rowspan=gridvec[2],
                  columnspan=gridvec[3])
+
+
+
+
 
 ######
 # MAIN
