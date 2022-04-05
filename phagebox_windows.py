@@ -1,4 +1,9 @@
 #!/usr/local/bin/python3
+"""
+This module contains all of the source code used for
+creating the tkinter GUI. Different functions for making
+the phagebox layout can be found in this python file.
+"""
 # in-house packages
 import phagebox_modules.control_modules as ctrl
 import phagebox_modules.arduino_controller as ard_ctrl
@@ -24,11 +29,6 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageTk
 import threading
 
-"""
-This module contains all of the source code used for
-creating the tkinter GUI. Different functions for making
-the phagebox layout can be found in this python file.
-"""
 
 
 
@@ -36,6 +36,7 @@ the phagebox layout can be found in this python file.
 LARGE_FONT= ("Verdana", 12)
 TITLE_FONT= ("Verdana", 40)
 style.use("ggplot")
+g_THREAD_STATE = 0
 
 # Page classes
 class phageBoxGUI(tk.Tk):
@@ -255,6 +256,7 @@ class PhageBoxHome(tk.Frame):
         out_label2 = tk.Label(self.frame, text="Note: MUST SPECIFY! (automatically saved)", font=("Helvetica", 20))
         out_label2.grid(row=self.ROWCURR, column=1, columnspan=7)
         self.ROWCURR += 1
+
         ## config file
         config_label = tk.Label(self.frame, text="Set a constant temp: ", font=("Helvetica", 20))
         config_label.grid(row=self.ROWCURR, sticky="w", column=0)
@@ -264,6 +266,7 @@ class PhageBoxHome(tk.Frame):
         out_label2 = tk.Label(self.frame, text="Note: Don't add config paths, if selected", font=("Helvetica", 20))
         out_label2.grid(row=self.ROWCURR, column=1, columnspan=6, stick="w")
         self.ROWCURR += 1
+
         ## Peltier module 1
         config_label = tk.Label(self.frame, text="Peltier Module 1 ", font=("Helvetica", 20, "bold"))
         config_label.grid(row=self.ROWCURR, sticky="w", column=0, pady=(20, 5))
@@ -447,7 +450,7 @@ class PhageBoxHome(tk.Frame):
         print("Now stopping the arduino, if a process exists")
         if (self.ard_process[peltnumber] != None):
             print(f"stopping process for peltier: {peltnumber}")
-            self.ard_process[peltnumber].terminate()
+            self.ard_process[peltnumber]._stop()
             #TODO: may need to call destructor like below
             #self.ard[peltnumber] = None
             self.ard_process[peltnumber] = None
@@ -528,7 +531,14 @@ HELPMSG = """
 You must have a serial port when using the phagebox GUI.
 For example, use the folowing command:
 
+General Usage:
+python phagebox_v4.py <port for serial/UART communication>
+
+if mac:
 python phagebox_v4.py /dev/cu.usbserial-1440
+
+if Windows:
+python phagebox_v4.py COM2
 """
 
 def main():

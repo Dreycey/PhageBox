@@ -1,4 +1,18 @@
 #!/usr/local/bin/python3
+"""
+Author: Dreycey Albin
+
+Arduino module
+--------------
+This module communicates through UART with a particular port. There
+is a button mapping that is assumed for this module. So as long as this
+is congruent with the character codes being parsed by the arduino, then all
+of the commands are correctly communicated with the arduino.
+
+Useful Methods/Classes
+-----------------------
+
+"""
 # in-house packages
 import phagebox_modules.control_modules as ctrl
 # std-packages
@@ -6,6 +20,17 @@ from time import sleep
 import serial
 import numpy, sys
 import time
+
+
+
+
+
+class KillThread(Exception):
+    """ 
+    Kill thread is used to cause a raise exception as 
+    work-around for killing python thread
+    """
+    pass
 
 class arduino_controller():
     """
@@ -239,6 +264,15 @@ class arduino_controller():
                 data_file.write("\n")
 
             sleep(.1) #delay for 10th of a second
+
+    def _stop(self):
+        """
+        this helps kill the thread in which the arduino
+        controller is running on. 
+        """
+        raise KillThread
+
+
 
 def main():
     #####
