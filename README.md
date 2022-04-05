@@ -13,19 +13,19 @@ This repository contains a graphical user interface, arduino libraries, and modu
 python phagebox.py <port>
 ```
 
-### Open the GUI using in Mac
+### Open the GUI using Mac
 * An example is the following command, ensure the correct port is being passed.
 ```
 python phagebox_v4.py /dev/cu.usbserial-1440
 ```
 
-### Open the GUI using in Windows
+### Open the GUI using Windows
 * An example is the following command, ensure the correct port is being passed.
 ```
 python phagebox_v4.py COM2
 ```
 
-# DEPRECATED BELOW
+# Other various Scripts included in the repository
 ## Basic temp measurements- 03/04/2021
 
 1. Open the correct .ino for the arduino:
