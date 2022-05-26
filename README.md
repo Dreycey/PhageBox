@@ -1,6 +1,8 @@
 # Phage-Box
 This repository contains all of the code regarding the Phage-Box. 
 
+![PhageBox Logo](figures/logo.png)
+
 ## Description
 This repository contains a graphical user interface, arduino libraries, and modules that are used within the PhageBox. Below are instructions for using this code base, as well as information for initiating the GUI. 
 
