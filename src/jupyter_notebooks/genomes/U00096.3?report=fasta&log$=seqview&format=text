@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head xmlns:xi="http://www.w3.org/2001/XInclude"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- meta -->
+    <meta name="robots" content="index,nofollow,noarchive" />
+<meta name="ncbi_app" content="entrez" /><meta name="ncbi_db" content="nuccore" /><meta name="ncbi_report" content="fasta" /><meta name="ncbi_format" content="text" /><meta name="ncbi_pagesize" content="20" /><meta name="ncbi_sortorder" content="default" /><meta name="ncbi_pageno" content="1" /><meta name="ncbi_resultcount" content="1" /><meta name="ncbi_op" content="retrieve" /><meta name="ncbi_pdid" content="fasta" /><meta name="ncbi_sessionid" content="CE882C4622B84A81_0355SID" /><meta name="ncbi_uidlist" content="545778205" /><meta name="ncbi_filter" content="all" /><meta name="ncbi_stat" content="false" /><meta name="ncbi_hitstat" content="false" />
+
+    
+    <!-- title -->
+    <title>Escherichia coli str. K-12 substr. MG1655, complete genome - Nucleotide - NCBI</title>
+    
+    <!-- Common JS and CSS -->
+    
+		<script type="text/javascript">
+		    var ncbi_startTime = new Date();
+		</script>
+		<style>.async-hide { opacity: 0 !important} </style><script type="text/javascript" src="/core/assets/kis/dist/kis_ga_nuc_protein.js"></script><script type="text/javascript" src="https://static.pubmed.gov/core/jig/1.15.3/js/jig.min.js"></script>
+				
+			<script type="text/javascript" src="/core/ajax_loader/2.1/js/loadingbar.js"></script> 
+        	<script type="text/javascript" src="/core/ajax_loader/2.1/js/contentLoader.js"></script>
+        	<link type="text/css" rel="stylesheet" href="/core/ajax_loader/2.1/css/loadingbar.css" />
+			
+			  
+    
+    <link xmlns="http://www.w3.org/1999/xhtml" type="text/css" rel="stylesheet" href="//static.pubmed.gov/portal/portal3rc.fcgi/4204919/css/3881636/3579733.css" xml:base="http://127.0.0.1/sites/static/header_footer/" />    
+<link rel="shortcut icon" href="//www.ncbi.nlm.nih.gov/favicon.ico" /><meta name="ncbi_phid" content="CE882C4622B7F3D10000000001630077.m_10" /><script type="text/javascript"><!--
+var ScriptPath = '/portal/';
+var objHierarchy = {"name":"EntrezSystem2","type":"Layout","realname":"EntrezSystem2",
+"children":[{"name":"EntrezSystem2.PEntrez","type":"Cluster","realname":"EntrezSystem2.PEntrez",
+"children":[{"name":"EntrezSystem2.PEntrez.DbConnector","type":"Portlet","realname":"EntrezSystem2.PEntrez.PEntrez.DbConnector","shortname":"DbConnector"},
+{"name":"EntrezSystem2.PEntrez.ParamContainer","type":"Portlet","realname":"EntrezSystem2.PEntrez.PEntrez.ParamContainer","shortname":"ParamContainer"},
+{"name":"EntrezSystem2.PEntrez.MyNcbi","type":"Portlet","realname":"EntrezSystem2.PEntrez.PEntrez.MyNcbi","shortname":"MyNcbi"},
+{"name":"EntrezSystem2.PEntrez.UserPreferenceUrlParamContainer","type":"Portlet","realname":"EntrezSystem2.PEntrez.PEntrez.UserPreferenceUrlParamContainer","shortname":"UserPreferenceUrlParamContainer"},
+{"name":"EntrezSystem2.PEntrez.GridProperty","type":"Portlet","realname":"EntrezSystem2.PEntrez.PEntrez.GridProperty","shortname":"GridProperty"},
+{"name":"EntrezSystem2.PEntrez.Nuccore","type":"Cluster","realname":"EntrezSystem2.PEntrez.Nuccore",
+"children":[{"name":"EntrezSystem2.PEntrez.Nuccore.NoPortlet","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.NoPortlet","shortname":"NoPortlet"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_PageController","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_PageController","shortname":"Sequence_PageController"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Entrez_SearchBar","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.Entrez_SearchBar","shortname":"Entrez_SearchBar"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Entrez_BotRequest","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.Entrez_BotRequest","shortname":"Entrez_BotRequest"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_LimitsTab","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_LimitsTab","shortname":"Sequence_LimitsTab"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel","type":"Cluster","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel",
+"children":[{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.blankToolPanel","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.blankToolPanel","shortname":"blankToolPanel"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.Sequence_ResultsController","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Sequence_ResultsController","shortname":"Sequence_ResultsController"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.Entrez_Filters","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.Entrez_Filters","shortname":"Entrez_Filters"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.Entrez_Pager","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.Entrez_Pager","shortname":"Entrez_Pager"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.Sequence_DisplayBar","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Sequence_DisplayBar","shortname":"Sequence_DisplayBar"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.HelpFormAttributes","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.HelpFormAttributes","shortname":"HelpFormAttributes"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.Entrez_Collections","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.Entrez_Collections","shortname":"Entrez_Collections"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.Sequence_SpellCheck","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Sequence_SpellCheck","shortname":"Sequence_SpellCheck"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SearchEngineReferralCheck","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.SearchEngineReferralCheck","shortname":"SearchEngineReferralCheck"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.KnowledgePanel","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.KnowledgePanel","shortname":"KnowledgePanel"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.HistoryDisplay","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.HistoryDisplay","shortname":"HistoryDisplay"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.Discovery_SearchDetails","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Entrez_ResultsPanel.Discovery_SearchDetails","shortname":"Discovery_SearchDetails"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.KISSensor","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.KISSensor","shortname":"KISSensor"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.MultiSensorPortlet","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.MultiSensorPortlet","shortname":"MultiSensorPortlet"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.WrongDbSensor","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.WrongDbSensor","shortname":"WrongDbSensor"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.Sequence_DiscoveryExptChooser","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.Sequence_DiscoveryExptChooser","shortname":"Sequence_DiscoveryExptChooser"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer","type":"Cluster","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.SequenceViewer",
+"children":[{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerTitle","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerTitle","shortname":"Sequence_ViewerTitle"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport","shortname":"Sequence_ViewerReport"}]},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.EmptyPortlet","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_ResultsPanel.EmptyPortlet","shortname":"EmptyPortlet"}]},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_Facets","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence_Facets","shortname":"Sequence_Facets"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Entrez_Clipboard","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.Entrez_Clipboard","shortname":"Entrez_Clipboard"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Sequence_StaticParts","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Sequence_StaticParts","shortname":"Sequence_StaticParts"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.Entrez_Messages","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.Entrez_Messages","shortname":"Entrez_Messages"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.NcbiJSCheck","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.NcbiJSCheck","shortname":"NcbiJSCheck"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.NCBIFooter_dynamic","type":"Cluster","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.NCBIFooter_dynamic",
+"children":[{"name":"EntrezSystem2.PEntrez.Nuccore.NCBIFooter_dynamic.Footer_ExtraData","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.NCBIFooter_dynamic.Footer_ExtraData","shortname":"Footer_ExtraData"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.NCBIFooter_dynamic.NCBIFooter_dynamic","type":"Cluster","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.NCBIFooter_dynamic.NCBIFooter_dynamic",
+"children":[{"name":"EntrezSystem2.PEntrez.Nuccore.NCBIFooter_dynamic.NCBIFooter_dynamic.NCBIBreadcrumbs","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.NCBIFooter_dynamic.NCBIFooter_dynamic.NCBIBreadcrumbs","shortname":"NCBIBreadcrumbs"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.NCBIFooter_dynamic.NCBIFooter_dynamic.NCBIHelpDesk","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.NCBIFooter_dynamic.NCBIFooter_dynamic.NCBIHelpDesk","shortname":"NCBIHelpDesk"},
+{"name":"EntrezSystem2.PEntrez.Nuccore.NCBIFooter_dynamic.NCBIFooter_dynamic.NCBIApplog_NoScript_Ping","type":"Portlet","realname":"EntrezSystem2.PEntrez.Nuccore.Sequence.Entrez_Database.NCBIFooter_dynamic.NCBIFooter_dynamic.NCBIApplog_NoScript_Ping","shortname":"NCBIApplog_NoScript_Ping"}]}]}]}]}]};
+--></script>
+<meta name='referrer' content='origin-when-cross-origin'/><link type="text/css" rel="stylesheet" href="//static.pubmed.gov/portal/portal3rc.fcgi/4205831/css/3808861/3917732/3974050/3751656/3395415/4091728/3257261.css" /><link type="text/css" rel="stylesheet" href="//static.pubmed.gov/portal/portal3rc.fcgi/4205831/css/3501913.css" media="print" /><script type="text/javascript">
+
+var ObjectLinks=[{i:0, ename: "p$ExL", esid:"*", sname: "p$ExL", ssid:"*", dname:"p$el", dsid:"0",m:"CopyValue",p:[],f: function(src, dst) {fn_CopyValue(src, dst);}}]
+
+
+var ActiveNames = {"p$ExL":1, "EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.ExpandGaps":0, "EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.InUse":0, "EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.ItemCount":0, "EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.db":0, "EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.display_type":0, "EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.fasta_text_params":0, "EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.maxdownloadsize":0, "EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.report":0};
+</script></head>
+    <body>
+        <form enctype="application/x-www-form-urlencoded" name="EntrezForm" method="post" onsubmit="return false;" action="/nuccore" id="EntrezForm">
+            <div id="maincontent" class="container">
+                <div>
+  <div id="viewercontent1" class="seq gbff" val="545778205" SequenceSize="6427237" VirtualSequence=""></div>
+  <div class="hidden">
+    <input name="EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.db" sid="1" type="hidden" value="nuccore" />
+    <input name="EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.report" sid="1" type="hidden" value="fasta_text" />
+    <input name="EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.maxdownloadsize" sid="1" type="hidden" value="1000000" />
+    <input name="EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.display_type" sid="1" type="hidden" value="single" />
+    <input name="EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.ItemCount" sid="1" type="hidden" value="1" />
+    <input name="EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.InUse" sid="1" type="hidden" value="" />
+    <input name="EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.ExpandGaps" sid="1" type="hidden" value="" />
+    <input name="EntrezSystem2.PEntrez.Nuccore.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerReport.fasta_text_params" sid="1" type="hidden" value="" />
+  </div>
+</div>
+
+            </div>
+        <input type="hidden" name="p$a" id="p$a" /><input type="hidden" name="p$l" id="p$l" value="EntrezSystem2" /><input type="hidden" name="p$st" id="p$st" value="nuccore" /><input name="SessionId" id="SessionId" value="CE882C4622B84A81_0355SID" disabled="disabled" type="hidden" /><input name="Snapshot" id="Snapshot" value="/projects/Sequences/SeqDbRelease@1.139" disabled="disabled" type="hidden" /></form>
+    
+
+<!-- CE882C4622B84A81_0355SID /projects/Sequences/SeqDbRelease@1.139 portal101 v4.1.r643667 Fri, Jan 14 2022 01:18:35 -->
+<span id="portal-csrf-token" style="display:none" data-token="CE882C4622B84A81_0355SID"></span>
+
+
+<script type='text/javascript' src='/portal/js/portal.js'></script><script type="text/javascript" src="//static.pubmed.gov/portal/portal3rc.fcgi/4205831/js/4201164/3217400/4176568/4177091.js" snapshot="nuccore"></script></body>
+</html>
