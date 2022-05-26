@@ -90,7 +90,7 @@ class PhageBoxHome(tk.Frame):
         # TODO: DELETE: self.ard = [None, None]
         self.ard_obj = ard_ctrl.arduino_controller(self.ser_port)
         self.configEntryList = [None, None, None]
-        self.parse_cmds = [('2', '1','TEC_1:'),('4', '3','TEC_2:')]
+        self.parse_cmds = [('1', '2', 'TEC_MET:'),('3', '4', 'TEC_2:')]
         self.current_fig = None
         self.tempoutfileEntry = None
         self.temp_bool = False # i.e. is the temp being used
