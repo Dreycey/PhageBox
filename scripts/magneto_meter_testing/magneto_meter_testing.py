@@ -3,13 +3,17 @@
 DESCRIPTION:
     This script is used in conjunction to the magnetometer
     to collect data from the magenetometer. 
+Usage:
+    python magneto_meter_testing.py -p <path to UART port> -o <Output CSV>
+Example:
+    python magneto_meter_testing.py -p /dev/cu.usbmodem14101 -o OUTTEST.csv
 """
 # non-std packages
 from typing import List
 import serial
 import argparse
 import sys
-
+import os
 
 # Create an argparse.Namespace object from input args.
 def parseArgs(argv=None) -> argparse.Namespace:
@@ -34,29 +38,36 @@ class ArduinoMagnetoMeterMonitor:
     def __init__(self, port):
         self.port = port
         self.serial = serial.Serial(port, 9600)
-    
+        self.x = 0
+        self.y = 0
+        self.z = 0
+
     def writeMagneticOutputToCSV(self, outputCSV):
         """
         This method outputs the z,x,y readings of the
         magnetic flux to a file. It is assumed this will
         be running continuously. 
         """
+        if os.path.exists(outputCSV):
+            os.remove(outputCSV)
         output_file = open(outputCSV, "a")
-        time_coounter = 0
+        output_file.write(f"time_counter,x (uTesla),y (uTesla),z (uTesla)\n")
+        time_counter = 0
         while True:
-            magnetic_measures: List[str] = str(self.serial.readline()).split("\t")
-            for val_return in magnetic_measures:
-
-                if "x" in val_return:
-                    x = val_return.split(" ")[1]
-                elif "y" in val_return:
-                    y = val_return.split(" ")[1]
-                elif "z" in val_return:
-                    z = val_return.split(" ")[1]
-                else:
-                    return NameError(" {val_return} did not have x, y, or z for parsing")
-            output_file.write(f"{time_coounter},{x},{y},{z}")
-            time_coounter += 1
+            magnetic_measures: str = self.serial.readline().decode('ascii').strip(" ").strip("\n").strip("\r")
+            val_return = magnetic_measures.lower()
+            if "x:" in val_return:
+                self.x = val_return.split(":")[1]
+            elif "y:" in val_return:
+                self.y = val_return.split(":")[1]
+            elif "z:" in val_return:
+                self.z = val_return.split(":")[1]
+            else:
+                continue
+            output_file.write(f"{time_counter},{self.x},{self.y},{self.z}\n")
+            time_counter += 1
+            if time_counter % 10 == 0:
+                print(f"{time_counter} timepoints added", end="\r")
 
 def main():
     """ 
@@ -64,9 +75,9 @@ def main():
     magnetic flux produced by the magenetometer module,
     and collecting this information into a CSV.
     """
-    arguments = parseArgs(sys.argv)
+    arguments = parseArgs(sys.argv[1:])
     mag_monitor = ArduinoMagnetoMeterMonitor(arguments.port)
-    mag_monitor.writeMagneticOutputToCSV(arguments.ouputflie)
+    mag_monitor.writeMagneticOutputToCSV(arguments.outputfile)
 
 if __name__ == "__main__":
     main()
