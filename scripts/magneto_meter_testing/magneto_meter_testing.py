@@ -4,7 +4,7 @@ DESCRIPTION:
     This script is used in conjunction to the magnetometer
     to collect data from the magenetometer. 
 USAGE:
-    python magneto_meter_testing.py -p <path to UART port> -o <Output CSV>
+    python magneto_meter_testing.py -p <path to UART port> -o <Output CSV> [--disc_test]
 EXAMPLE:
     python magneto_meter_testing.py -p /dev/cu.usbmodem14101 -o OUTTEST.csv
 """
@@ -29,6 +29,7 @@ def parseArgs(argv=None) -> argparse.Namespace:
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-v", "--verbose", action="store_true")
     parser.add_argument("-p", "--port", help="input port path", required=True)
+    group.add_argument("-d", "--disc_test", action="store_true")
     parser.add_argument("-o", "--outputfile", help="output csv file path", required=True)
     return parser.parse_args(argv)
 
@@ -42,7 +43,7 @@ class ArduinoMagnetoMeterMonitor:
         self.y = 0
         self.z = 0
 
-    def writeMagneticOutputToCSV(self, outputCSV):
+    def writeMagneticOutputToCSV(self, outputCSV, discreet_tests=False):
         """
         This method outputs the z,x,y readings of the
         magnetic flux to a file. It is assumed this will
@@ -68,6 +69,10 @@ class ArduinoMagnetoMeterMonitor:
             time_counter += 1
             if time_counter % 10 == 0:
                 print(f"{time_counter} timepoints added", end="\r")
+            if (time_counter % 10 == 0) and discreet_tests:
+                val = input("SWITCH (state ON/OFF): ")
+                output_file.write(f"SWITCH {val} \n")
+                self.serial.reset_input_buffer()
 
 def main():
     """ 
@@ -77,7 +82,7 @@ def main():
     """
     arguments = parseArgs(sys.argv[1:])
     mag_monitor = ArduinoMagnetoMeterMonitor(arguments.port)
-    mag_monitor.writeMagneticOutputToCSV(arguments.outputfile)
+    mag_monitor.writeMagneticOutputToCSV(arguments.outputfile, discreet_tests=arguments.disc_test)
 
 if __name__ == "__main__":
     main()
