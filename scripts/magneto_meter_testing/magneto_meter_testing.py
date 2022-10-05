@@ -3,9 +3,9 @@
 DESCRIPTION:
     This script is used in conjunction to the magnetometer
     to collect data from the magenetometer. 
-Usage:
+USAGE:
     python magneto_meter_testing.py -p <path to UART port> -o <Output CSV>
-Example:
+EXAMPLE:
     python magneto_meter_testing.py -p /dev/cu.usbmodem14101 -o OUTTEST.csv
 """
 # non-std packages
