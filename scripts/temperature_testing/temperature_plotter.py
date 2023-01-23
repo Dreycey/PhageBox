@@ -56,7 +56,7 @@ class ArduinoTempMonitor:
         for temperature in range(60, 100, 10):
             print(f"Set temperature to {temperature}")
             input("Press Enter once temperature steady...")
-            for position in range(0, 8, 1):
+            for position in range(0, 2, 1):
                 print(f"Change position to {position}")
                 input("Press Enter once position steady...")
                 # collect temperatures at the current position for a set temperature.
