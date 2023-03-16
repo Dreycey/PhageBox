@@ -10,6 +10,8 @@ For building the phagebox, please review the build manual for a step-by-step bui
 
 ## Graphial User Interface.
 
+![box diaram](figures/GUI.pdf)
+
 ### Starting the GUI
 
 General Usage:
