@@ -10,7 +10,7 @@ For building the phagebox, please review the build manual for a step-by-step bui
 
 ## Graphial User Interface.
 
-Please see the ![GUI diagram](figures/GUI.pdf) for more information on what the GUI looks like once opened.
+Please see the [GUI diagram](figures/GUI.pdf) for more information on what the GUI looks like once opened.
 
 ### Starting the GUI
 
