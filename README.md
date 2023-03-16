@@ -50,6 +50,8 @@ To use this library, drag the entire contents of `src/phagebox_arduino_lib` into
 
 ### Arduino sketch example
 
+This example uses an Arduino sketch to import the library and initialize the PhageBox embeded software.
+
 ```
 #include <PhageBox.h>
 
