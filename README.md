@@ -22,10 +22,9 @@ optional arguments:
   -s SERIAL_PORT, --serial_port SERIAL_PORT
                         Specify the serial port
   -m SLOPE, --slope SLOPE
-                        Slope of (Chip Temp vs Peltier Temp) [Default 0.7 @RT]
+                        Slope of (Chip Temp vs Peltier Temp) [Default 1.2]
   -b INTERCEPT, --intercept INTERCEPT
-                        y-intercept (Chip Temp vs Peltier Temp) [Default 5
-                        @RT]
+                        y-intercept (Chip Temp vs Peltier Temp) [Default -2]
   -v, --verbose         prints output figures and debug info
 ```
 
