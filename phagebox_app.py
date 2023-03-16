@@ -4,6 +4,9 @@ Author: Dreycey Albin
 Description:
     This file contains the app for the phagebox. This activates the
     front end which can interact with the backend arduino controller.
+
+Design Pattern:
+    This uses a model-view-controller for interacting the phagebox.
 """
 # standard library
 import tkinter as tk
@@ -19,10 +22,11 @@ from src.phagebox_modules.arduino_controller import ArduinoController
 
 
 
-
 # global control
 customtkinter.set_appearance_mode("light")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
+
+
 
 def parseArgs(argv=None) -> argparse.Namespace:
     """
@@ -35,12 +39,10 @@ def parseArgs(argv=None) -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("-s", "--serial_port", help="Specify the serial port", required=True)
-    parser.add_argument("-m", "--slope", type=float, default=0.7, help="Slope of (Chip Temp vs Peltier Temp) [Default 0.7 @RT]", required=False)
-    parser.add_argument("-b", "--intercept", type=float, default=5, help="y-intercept (Chip Temp vs Peltier Temp) [Default 5 @RT]", required=False)
+    parser.add_argument("-m", "--slope", type=float, default=1.2, help="Slope of (Chip Temp vs Peltier Temp) [Default 1.2 @RT]", required=False)
+    parser.add_argument("-b", "--intercept", type=float, default=-2, help="y-intercept (Chip Temp vs Peltier Temp) [Default -2 @RT]", required=False)
     parser.add_argument("-v", "--verbose", action="store_true", help="prints output figures and debug info", required=False)
     return parser.parse_args(argv)
-
-
 
 class App(customtkinter.CTk):
     """
@@ -53,13 +55,10 @@ class App(customtkinter.CTk):
 
     def __init__(self, serial_port, y_int, slope):
         super().__init__()
-        # super().configure(bg='white')
         super().columnconfigure(0, weight=1)
         super().rowconfigure(0, weight=1)
-        # super().geometry("1000x1000")
-        # self.minsize(App.WIDTH, App.HEIGHT)
-        # self.maxsize(App.WIDTH, App.HEIGHT)
 
+        # add title for the GUI
         self.title('PhageBox')
 
         # arduino-adapter instantiation 
@@ -69,14 +68,11 @@ class App(customtkinter.CTk):
         view = PhageBoxGUI(self, self.model, y_int, slope)
         view.grid(row=0, column=0, padx=10, pady=10)
 
-        # # create a controller
-        # controller = Controller(model, view)
-
-        # # set the controller to view
-        # view.set_controller(controller)
-
     def stop_now(self):
         """
+        Description:
+            This destroys the window when exiting, and ensures a
+            'distructor like call to the model class'.
         """
         self.model.stop_now()
         self.destroy()
