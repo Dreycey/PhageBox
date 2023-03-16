@@ -3,10 +3,16 @@
 Author: Dreycey Albin
 
 Description:
+------------
     This module communicates through UART with a particular port. 
     This module performs 'backend' communication with an embedded 
     device, here the PhageBox. Further extension may be made to this
-    front-end=backend design pattern by using a model-view controller varient.
+    frontend-backend design pattern by using a model-view controller varient.
+
+Design Patterns:
+----------------
+    1. Model-view controller interface. This file contains the interface that utilizes
+       an adapter pattern.
 
 Communication Through UART
 --------------------------
@@ -23,8 +29,8 @@ Communication Through UART
 
 
 Useful Methods/Classes
------------------------
-
+----------------------
+    1. ArduinoController - acts as a controller for Arduino. This acts as an API for the embedded software.
 """
 # standard library
 from time import sleep
@@ -35,7 +41,6 @@ import threading
 import tkinter as tk
 # non-standard library
 # in-house packages
-import src.phagebox_modules.control_modules as ctrl
 
 
 
@@ -71,7 +76,6 @@ class ArduinoController:
         """
         print("arduino-adapter destructor being called")
         self.ser.__del__()
-
 
     def stop_now(self):
         self.stop()

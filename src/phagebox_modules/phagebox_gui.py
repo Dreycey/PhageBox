@@ -2,12 +2,16 @@
 Author: Dreycey Albin
 
 Description:
+------------
     This module contains the front end GUI for the phagebox. This 
     interacts with the backend arduino controller.
 
 Design Patterns:
+----------------
     1. Composite Pattern - used for the TKinter frames. Each is of type 'BaseView'
-Classes
+
+Useful Methods/Classes
+----------------------
     1. BaseView - base class for the TK frames [enforces a create_view() method]
         (layer 1)
         2. PhageBoxGUI - most outer frame ordering inner frames (layer 1)
@@ -18,8 +22,6 @@ Classes
             6. PCRFrame -  frame for displaying the PCR buttons (layer 2)
             (layer 3)
                 7. PCRStateFrame - frame for PCR states (layer 3)
-Methods
-    No stand-alone methods
 """
 # standard library
 from sys import float_repr_style
@@ -136,6 +138,7 @@ class BaseFrame_original(tk.Frame):
     def slope(self, slope):
         self._slope = slope
 
+
 class BaseFrame(customtkinter.CTkFrame):
     """
     Description:
@@ -226,6 +229,7 @@ class BaseFrame(customtkinter.CTkFrame):
         #webbrowser.get('chrome').open("https://github.com/Dreycey/PhageBox", new=0, autoraise=True)
         print("called")
         webbrowser.open(url)
+
 
 class PhageBoxGUI(BaseFrame):
     """
@@ -358,6 +362,7 @@ class LogoFrame(BaseFrame):
                                                         text_font=("Roboto Medium", 20))
         self.label_radio_group.grid(row=0, column=1, columnspan=1, pady=2, padx=10, sticky="ew")
         self.columnconfigure(1, weight=1, minsize=2) # allow for expanding/etc
+
 
 class MiscFrame(BaseFrame):
     """
