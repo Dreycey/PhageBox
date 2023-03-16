@@ -10,7 +10,7 @@ For building the phagebox, please review the build manual for a step-by-step bui
 
 ## Graphial User Interface.
 
-![box diaram](figures/GUI.pdf)
+Please see the ![GUI diagram](figures/GUI.pdf) for more information on what the GUI looks like once opened.
 
 ### Starting the GUI
 
@@ -44,7 +44,7 @@ python phagebox_app.py -s /dev/tty.usbserial-1430
 
 ## Embedded Device Software.
 
-![box diaram](figures/box_diagram.png)
+![Software box diagram](figures/box_diagram.png)
 
 ### Install
 
