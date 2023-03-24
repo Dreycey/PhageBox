@@ -12,9 +12,7 @@ The below outlines the software used to impliment the finite state machine contr
 
 ## Usage
 
-This example uses an Arduino sketch to import the PhageBox library and initialize the embedded software. This sketch is also available here: `PhageBox/arduino
-/phageBox_controller/phageBox_controller.ino`
-
+To use this library, drag the entire contents of `src/phagebox_embedded/` into your local arduino libary and import. More detailed instructions can be found in the [arduino documentation](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries).
 
 ```
 #include <PhageBox.h>
