@@ -47,7 +47,7 @@ import matplotlib.pyplot as plt
 from PIL import ImageTk, Image
 import customtkinter
 # in-house packages
-from src.phagebox_modules.arduino_controller import ArduinoController
+from src.phagebox_gui.arduino_controller import ArduinoController
 
 
 
