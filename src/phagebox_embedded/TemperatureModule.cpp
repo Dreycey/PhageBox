@@ -68,14 +68,14 @@ void TemperatureModule::toggle_relay()
 void TemperatureModule::heater_on()
 {
     // Serial.print("Heater ON \n");
-    toggle_pin_off(relayPin); // from GPIO module
+    toggle_pin_on(relayPin); // from GPIO module
 }
 
 // Defined in header
 void TemperatureModule::heater_off()
 {
     // Serial.print("Heater OFF \n");
-    toggle_pin_on(relayPin); // from GPIO module
+    toggle_pin_off(relayPin); // from GPIO module
 }
 
 // Defined in header
