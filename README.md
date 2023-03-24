@@ -2,7 +2,7 @@
 
 # Description
 
-This repository contains a graphical user interface, arduino libraries, and modules that are used within the PhageBox. Below are instructions for using this code base, as well as information for initiating the GUI.
+This repository contains a graphical user interface, arduino libraries, and modules that are used within PhageBox. Below are instructions for using this code base, as well as information for initiating the GUI.
 
 ## Building the PhageBox.
 
@@ -39,7 +39,7 @@ python phagebox_app.py -s /dev/tty.usbserial-1430
 Example (Windows):
 
 ```
-python phagebox_app.py -s /dev/tty.usbserial-1430
+python phagebox_app.py -s COM4
 ```
 
 ## Embedded Device Software.
@@ -52,7 +52,7 @@ To use this library, drag the entire contents of `src/phagebox_arduino_lib` into
 
 ### Arduino sketch example
 
-This example uses an Arduino sketch to import the library and initialize the PhageBox embeded software. This sketch is also available here: `PhageBox/arduino
+This example uses an Arduino sketch to import the PhageBox library and initialize the embedded software. This sketch is also available here: `PhageBox/arduino
 /phageBox_controller/phageBox_controller.ino`
 
 ```
@@ -72,7 +72,7 @@ void loop()
 
 ### Usage once library is installed
 
-Now from Serial you can send commands for controlling magnets and the "temperature modules":\
+Once installed, you can send commands through Serial/UART for controlling backlight, magnetic module and temperature modules:
 
 1. Heater 1 for 32 PCR cycles. **Cycles**: 15 seconds at 90C, 20 seconds at 50C, and 60 seconds at 72C.
 
