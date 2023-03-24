@@ -8,7 +8,7 @@ This libarary has been written for the PhageBox extension module. It assumes acc
 
 The below outlines the software used to impliment the finite state machine controlled PCR.
 
-![Software box diagram](figures/box_diagram.png)
+![Software box diagram](../../figures/box_diagram.png)
 
 ## Usage
 
