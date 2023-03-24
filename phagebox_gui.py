@@ -17,8 +17,8 @@ import atexit
 import argparse
 import customtkinter
 # in-house packages
-from src.phagebox_modules.phagebox_gui import PhageBoxGUI
-from src.phagebox_modules.arduino_controller import ArduinoController
+from src.phagebox_gui.phagebox_view import PhageBoxGUI
+from src.phagebox_gui.arduino_controller import ArduinoController
 
 
 
