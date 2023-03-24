@@ -74,17 +74,32 @@ void loop()
 
 Now from Serial you can send commands for controlling magnets and the "temperature modules":\
 
-1. "<H,1,32,15,90,20,50,60,72>"
-   The above says heater 1 for 32 PCR cycles. 15 seconds at 90C, ,20 seconds at 50C, and 60 seconds at 72C.
+1. Heater 1 for 32 PCR cycles. **Cycles**: 15 seconds at 90C, 20 seconds at 50C, and 60 seconds at 72C.
 
-2. "<H,2,32,15,90,20,50,60,72>"
-   The above says heater 2 for 32 PCR cycles. 15 seconds at 90C, ,20 seconds at 50C, and 60 seconds at 72C.
+```
+<H,1,32,15,90,20,50,60,72>
+```
 
-3. "<B,0,1>"
-   toggle the LED
+2. Heater 2 for 32 PCR cycles. **Cycles**: 15 seconds at 90C, 20 seconds at 50C, and 60 seconds at 72C.
 
-4. "<B,1,0>"
-   toggle the MAGNET
+```
+<H,2,32,15,90,20,50,60,72>
+```
 
-5. "<B,1,1>"
-   toggle both the MAGNET and LED
+3. Toggle the LED
+
+```
+<B,0,1>
+```
+
+4. Toggle the MAGNET
+
+```
+<B,1,0>
+```
+
+5. Toggle both the MAGNET and LED
+
+```
+<B,1,1>
+```
