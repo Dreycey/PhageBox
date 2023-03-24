@@ -169,14 +169,3 @@ class ArduinoController:
                     self.set_temperatures[1] = float(temperature)
                 else:
                     print(serial_in_string)
-
-
-# def main():
-#     #####
-#     # Controlling the temperature
-#     #####
-#     arrd = ArduinoController(ss)
-#     arrd.toggleMagnet()
-
-# if __name__ == "__main__":
-#     main()
