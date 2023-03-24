@@ -15,6 +15,7 @@ This directory contains scripts for the following:
 2. **Temperature testing.**
     1. `temperature_plotter.py` - Plotting of all the figures from a temperature test csv.
     2. `temperature_analysis.ipynb` - Plotting of all temperature measurements.
+    3. CSV Files - measurements collected from the device.
 3. **Temperature error.**
     1. `hysteresis_analysis.ipynb` - Plotting measurements from downloaded CSV files.
     2. CSV Files - UART and embedded measurements from different temperatures.
