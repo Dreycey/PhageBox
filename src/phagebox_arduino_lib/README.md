@@ -2,7 +2,7 @@
 
 ## Description
 
-This libarary has been written for the PhageBox extension module. It assumes access to the Arduino Libraries. This is an embedded C implementation of PCR using a finite state machine. This then controls GPIO registers directorly (bare metal) and implements a timer for switching states. The outcome of these modules is finite state machine that can control peltier (heating) modules on the device.
+The PhageBox is equipped with an embedded software library specifically tailored for its functions. The library consists of an embedded C/C++ implementation of PCR that utilizes a finite state machine to regulate cycle transitions. This implementation directly controls the device's GPIO registers at the hardware level and incorporates a timer for seamless state switching. The library's outcome is a finite state machine that effectively manages the peltier (heating) modules on the device.
 
 ### Block Diagram
 
@@ -12,7 +12,9 @@ The below outlines the software used to impliment the finite state machine contr
 
 ## Usage
 
-To use this library, drag it into the arduinno libary and import.
+This example uses an Arduino sketch to import the PhageBox library and initialize the embedded software. This sketch is also available here: `PhageBox/arduino
+/phageBox_controller/phageBox_controller.ino`
+
 
 ```
 #include <PhageBox.h>
@@ -29,35 +31,45 @@ void loop()
 }
 ```
 
-### Usage once library is installed
+### Usage Instructions (instead of GUI control)
 
-Once installed, you can send commands through Serial/UART for controlling backlight, magnetic module and temperature modules:
+After installing the library, you can utilize the Serial/UART interface to send commands for controlling the backlight, magnetic module, and temperature modules. Here are some examples of the available commands:
 
-1. Heater 1 for 32 PCR cycles. **Cycles**: 15 seconds at 90C, 20 seconds at 50C, and 60 seconds at 72C.
+1. Heater 1 Control.
+
+You can use the following command to control Heater 1 for 32 PCR cycles. The cycles consist of 15 seconds at 90C, 20 seconds at 50C, and 60 seconds at 72C.
 
 ```
 <H,1,32,15,90,20,50,60,72>
 ```
 
-2. Heater 2 for 32 PCR cycles. **Cycles**: 15 seconds at 90C, 20 seconds at 50C, and 60 seconds at 72C.
+2. Heater 2 Control.
+
+You can use the following command to control Heater 2 for 32 PCR cycles. The cycles consist of 15 seconds at 90C, 20 seconds at 50C, and 60 seconds at 72C.
 
 ```
 <H,2,32,15,90,20,50,60,72>
 ```
 
-3. Toggle the LED
+3. Backlight Control.
+
+You can use the following command to toggle the LED backlight:
 
 ```
 <B,0,1>
 ```
 
-4. Toggle the MAGNET
+4. Magnetic Module Control
+
+You can use the following command to toggle the magnetic module:
 
 ```
 <B,1,0>
 ```
 
-5. Toggle both the MAGNET and LED
+5. Backlight and Magnetic Module Control
+
+You can use the following command to toggle both the backlight and magnetic module:
 
 ```
 <B,1,1>
